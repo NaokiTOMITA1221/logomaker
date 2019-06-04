@@ -11,6 +11,38 @@ CHARS_TO_COLORS_DICT = {
     tuple('ACGT'): 'classic',
     tuple('ACGU'): 'classic',
     tuple('ACDEFGHIKLMNPQRSTVWY'): 'weblogo_protein',
+    ('AA',
+     'AC',
+     'AG',
+     'AT',
+     'CA',
+     'CC',
+     'CG',
+     'CT',
+     'GA',
+     'GC',
+     'GG',
+     'GT',
+     'TA',
+     'TC',
+     'TG',
+     'TT'): 'neighbor',
+    ('AA',
+     'AC',
+     'AG',
+     'AU',
+     'CA',
+     'CC',
+     'CG',
+     'CU',
+     'GA',
+     'GC',
+     'GG',
+     'GU',
+     'UA',
+     'UC',
+     'UG',
+     'UU'): 'neighbor',
 }
 
 weblogo_blue = [.02, .09, .74]
@@ -26,7 +58,7 @@ three_ones = np.ones(3)
 COLOR_SCHEME_DICT = {
     'classic': {
         'G': [1, .65, 0],
-        'TU': [1, 0, 0],
+        'T U': [1, 0, 0],
         'C': [0, 0, 1],
         'A': [0, .5, 0]
     },
@@ -35,12 +67,12 @@ COLOR_SCHEME_DICT = {
         'A': .2 * three_ones,
         'C': .4 * three_ones,
         'G': .6 * three_ones,
-        'TU': .8 * three_ones
+        'T U': .8 * three_ones
     },
 
     'base_pairing': {
-        'TAU': [1, .55, 0],
-        'GC': [0, 0, 1]
+        'T A U': [1, .55, 0],
+        'G C': [0, 0, 1]
     },
 
     # Suggested by Ryan Z. Friedman
@@ -49,17 +81,44 @@ COLOR_SCHEME_DICT = {
         'A': '#009980',
         'C': '#59B3E6',
         'G': '#E69B04',
-        'TU': '#1A1A1A'
+        'T U': '#1A1A1A'
     },
 
     # Weblogo: http://weblogo.berkeley.edu/examples.html
     # BlockLogo: http://research4.dfci.harvard.edu/cvc/blocklogo/HTML/examples.php
     'weblogo_protein': {
-        'RHK' : weblogo_blue, # positive charge
-        'DE' : weblogo_red, # negative charge
-        'QN' : weblogo_pink, # polar uncharged long
-        'GCSTY' : weblogo_green, # polar uncharged short and special cases (???)
-        'ILMAFVPW' : weblogo_black # hydrophobic
+        'R H K': weblogo_blue, # positive charge
+        'D E': weblogo_red, # negative charge
+        'Q N': weblogo_pink, # polar uncharged long
+        'G C S T Y': weblogo_green, # polar uncharged short and special cases (???)
+        'I L M A F V P W': weblogo_black # hydrophobic
+    },
+
+    # Suggested by Anna Posfai on 19.06.04
+    'neighbor': {
+        'AA': 'green',
+        'AC': 'blue',
+        'AG': 'orange',
+        'AT': 'red',
+        'AU': 'red',
+        'CA': '#e6194b',
+        'CC': '#3cb44b',
+        'CG': '#ffe119',
+        'CT': '#4363d8',
+        'CU': '#4363d8',
+        'GA': '#f58231',
+        'GC': '#911eb4',
+        'GG': '#46f0f0',
+        'GT': '#f032e6',
+        'GU': '#f032e6',
+        'TA': '#bcf60c',
+        'TC': '#fabebe',
+        'TG': '#008080',
+        'TT': '#e6beff',
+        'UA': '#bcf60c',
+        'UC': '#fabebe',
+        'UG': '#008080',
+        'UU': '#e6beff'
     },
 
     # Skylign: http://skylign.org/logo/example
@@ -135,32 +194,32 @@ COLOR_SCHEME_DICT = {
     },
 
     'hydrophobicity': {
-        'RKDENQ': [0, 0, 1],
-        'SGHTAP': [0, .5, 0],
-        'YVMCLFIW': [0, 0, 0]
+        'R K D E N Q': [0, 0, 1],
+        'S G H T A P': [0, .5, 0],
+        'Y V M C L F I W': [0, 0, 0]
     },
 
     'chemistry': {
-        'GSTYC': [0, .5, 0],
-        'QN': [.5, 0, .5],
-        'KRH': [0, 0, 1],
-        'DE': [1, 0, 0],
-        'AVLIPWFM': [0, 0, 0]
+        'G S T Y C': [0, .5, 0],
+        'Q N': [.5, 0, .5],
+        'K R H': [0, 0, 1],
+        'D E': [1, 0, 0],
+        'A V L I P W F M': [0, 0, 0]
     },
 
     'charge': {
-        'KRH': [0, 0, 1],
-        'DE': [1, 0, 0],
-        'GSTYCQNAVLIPWFM': [.5, .5, .5]
+        'K R H': [0, 0, 1],
+        'D E': [1, 0, 0],
+        'G S T Y C Q N A V L I P W F M': [.5, .5, .5]
     },
 
     'NajafabadiEtAl2017': {
-        'DEC': [.42, .16, .42],
-        'PG': [.47, .47, 0.0],
-        'MIWALFV': [.13, .35, .61],
-        'NTSQ': [.25, .73, .28],
-        'RK': [.74, .18, .12],
-        'HY': [.09, .47, .46],
+        'D E C': [.42, .16, .42],
+        'P G': [.47, .47, 0.0],
+        'M I W A L F V': [.13, .35, .61],
+        'N T S Q': [.25, .73, .28],
+        'R K': [.74, .18, .12],
+        'H Y': [.09, .47, .46],
     },
 }
 
@@ -200,7 +259,7 @@ def _expand_color_dict(color_dict):
     new_dict = {}
     for key in color_dict.keys():
         value = color_dict[key]
-        for char in key:
+        for char in key.split(' '):
             new_dict[char.upper()] = value
             new_dict[char.lower()] = value
     return new_dict
@@ -265,10 +324,10 @@ def get_color_dict(color_scheme, chars):
     chars = list(chars)
     chars.sort()
 
-    # Check that all entries in chars are strings of length 1
+    # Check that all entries in chars are strings of length at least 1
     for i, c in enumerate(chars):
         c = str(c) # convert from unicode to string to work with python 2
-        check(isinstance(c, str) and len(c)==1,
+        check(isinstance(c, str) and len(c) >= 1,
               'entry number %d in chars is %s; ' % (i, repr(c)) +
               'must instead be a single character')
 
